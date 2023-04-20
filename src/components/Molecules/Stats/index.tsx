@@ -1,50 +1,52 @@
-import { observer } from "mobx-react";
-import { useStores } from "@/src/hooks/useStores";
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { getColour, fileType, statType } from "@/src/utils/client.d";
 
-export interface statType {
-  ext: string;
-  percent: number;
-  colour: string | undefined;
-}
-
-const Stats = observer(() => {
-  const { data } = useStores();
+const Stats = function ({ data }: { data: fileType[] }) {
   ChartJS.register(ArcElement, Tooltip);
 
+  const getTotalFiles = function () {
+    return data.filter((file) => file.type !== "folder").length;
+  };
+
+  const getTotalOfFileType = function (ext: string) {
+    return data.filter((file) => file.ext === ext).length;
+  };
+
   const getPercentages = function () {
-    const percentages = data.files.reduce((acc: statType[], {type, ext}) => {
+    const percentages = data.reduce((acc: statType[], { type, ext }) => {
       if (type === "folder") {
         return acc;
       }
 
       const item = acc.find((p: statType) => p.ext === ext);
-      const percent = (data.getTotalOfFileType(ext) * 100) / data.getTotalFiles;
-      item ? (item.percent = Math.round(percent * 10) / 10) : acc.push({ext, percent, colour: data.getColour(ext)});
+      const percent = (getTotalOfFileType(ext) * 100) / getTotalFiles();
+      item
+        ? (item.percent = Math.round(percent * 10) / 10)
+        : acc.push({ ext, percent, colour: getColour(ext) });
 
       return acc;
     }, []);
 
     return {
-      labels: percentages.map(({ext}) => ext),
+      labels: percentages.map(({ ext }) => ext),
       datasets: [
         {
           label: "%",
-          data: percentages.map(({percent}) => percent),
-          backgroundColor: percentages.map(({colour}) => colour),
-        }
-      ],      
+          data: percentages.map(({ percent }) => percent),
+          backgroundColor: percentages.map(({ colour }) => colour),
+        },
+      ],
     };
   };
 
   return (
     <div className="stats-container">
-      <h2 style={{marginTop: 0}}>Stats</h2>
+      <h2 style={{ marginTop: 0 }}>Stats</h2>
       <Doughnut data={getPercentages()} />
-      <p>Total files: {data.getTotalFiles}</p>
+      <p>Total files: {getTotalFiles()}</p>
     </div>
   );
-});
+};
 
 export default Stats;

@@ -1,15 +1,14 @@
 import React from "react";
 import { File, FileText, Code, List, Table, Image, Video } from "react-feather";
-import { useStores } from "@/src/hooks/useStores";
+import { getColour } from "../../../utils/client.d"
 
 const FileIcon = ({ ext, hover }: { ext: string | undefined, hover: boolean }) => {
-  const { data } = useStores();
 
   const GetExtIcon = function (ext: string | undefined) {
     const style = {
       strokeWidth: "1.5px",
       size: 24,
-      color: data.getColour(ext),
+      color: getColour(ext),
     };
 
     switch (ext) {

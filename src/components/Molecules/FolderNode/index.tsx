@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { Folder, ChevronRight, ChevronDown } from "react-feather";
-import { fileType } from "@/src/stores/Data";
-import { useStores } from "@/src/hooks/useStores";
+import { fileType } from "@/src/utils/client.d";
 import FileNode from "@/src/components/Atoms/FileNode";
 
 const FolderNode = ({
   folder,
   margin,
+  data,
 }: {
   folder: fileType;
   margin: number;
+  data: fileType[];
 }) => {
-  const { data } = useStores();
   const [isOpen, setIsOpen] = useState(false);
   const [hoverState, setHoverState] = useState(false);
+
+  const getTotalChildren = function (parent: string) {
+    return data.filter((file) => file.parent === parent).length;
+  };
 
   return (
     <div>
@@ -28,12 +32,17 @@ const FolderNode = ({
         ) : (
           <ChevronRight strokeWidth={2} size={24} color={"#264653"} />
         )}
-        <Folder fill={hoverState ? "#41778D" : "#264653"} size={24} color={hoverState ? "#41778D" : "#264653"} /> {folder.name}
-        <span>{data.getTotalChildren(folder.id)}</span>
+        <Folder
+          fill={hoverState ? "#41778D" : "#264653"}
+          size={24}
+          color={hoverState ? "#41778D" : "#264653"}
+        />
+        {folder.name}
+        <span>{getTotalChildren(folder.id)}</span>
       </div>
       {isOpen && (
         <div className="folder-node-container">
-          {data.files
+          {data
             .filter(({ parent }) => parent === folder.id)
             .sort((a: fileType, b: fileType) =>
               a.type === "folder" || a.ext < b.ext ? -1 : 1
@@ -45,14 +54,13 @@ const FolderNode = ({
                 className="file-node-container"
               >
                 {file.type === "folder" ? (
-                  <FolderNode folder={file} margin={margin + 16} />
+                  <FolderNode folder={file} margin={margin + 16} data={data} />
                 ) : (
                   <FileNode title={file.name} ext={file.ext} id={file.id} />
                 )}
               </div>
             ))}
-          {data.files.filter(({ parent }) => parent === folder.id).length ===
-            0 && (
+          {data.filter(({ parent }) => parent === folder.id).length === 0 && (
             <div style={{ marginLeft: margin }} className="file-node-container">
               <FileNode title={"empty"} ext={undefined} id={undefined} />
             </div>

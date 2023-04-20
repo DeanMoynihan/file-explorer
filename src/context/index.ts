@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import Data from "../stores/Data";
+import Data from "../utils/util";
 
 const data = new Data();
 
