@@ -1,9 +1,14 @@
 import React from "react";
 import { File, FileText, Code, List, Table, Image, Video } from "react-feather";
-import { getColour } from "../../../utils/client"
+import { getColour } from "@/src/utils/client";
 
-const FileIcon = ({ ext, hover }: { ext: string | undefined, hover: boolean }) => {
-
+const FileIcon = ({
+  ext,
+  hover,
+}: {
+  ext: string | undefined;
+  hover: boolean;
+}) => {
   const GetExtIcon = function (ext: string | undefined) {
     const style = {
       strokeWidth: "1.5px",
@@ -34,7 +39,10 @@ const FileIcon = ({ ext, hover }: { ext: string | undefined, hover: boolean }) =
   };
 
   return (
-    <div className="file-icon" style={{background: hover ? "#FEFAE0" : "#FAEDCD"}}>
+    <div
+      className="file-icon"
+      style={{ background: hover ? "#FEFAE0" : "#FAEDCD" }}
+    >
       {GetExtIcon(ext)}
     </div>
   );

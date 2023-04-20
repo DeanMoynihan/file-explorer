@@ -70,6 +70,16 @@ span {
   max-width: 25%;
 }
 
+.counter-container {
+  background-color: #faedcd;
+  padding: 2px;
+  border-radius: 8px;
+  min-width: 30px;
+  text-align: center;
+  color: #2f576775;
+  display: inline-block;
+}
+
 @media only screen and (max-width: 600px) {
   .content-container {
     display: flex;
