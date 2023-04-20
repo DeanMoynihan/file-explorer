@@ -1,5 +1,5 @@
 import Display from "@/src/components/Molecules/Display/index";
-import { fileType } from "@/src/utils/client.d";
+import { fileType } from "@/src/utils/client";
 
 export default function Home({data}: {data: fileType[]}) {
   return (

@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { getColour, fileType, statType } from "@/src/utils/client.d";
+import { getColour, fileType, statType } from "@/src/utils/client";
 
 const Stats = function ({ data }: { data: fileType[] }) {
   ChartJS.register(ArcElement, Tooltip);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Folder, ChevronRight, ChevronDown } from "react-feather";
-import { fileType } from "@/src/utils/client.d";
+import { fileType } from "@/src/utils/client";
 import FileNode from "@/src/components/Atoms/FileNode";
 
 const FolderNode = ({

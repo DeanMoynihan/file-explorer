@@ -1,7 +1,7 @@
 import { Audio } from "react-loader-spinner";
 import FolderNode from "@/src/components/Molecules/FolderNode/index";
 import Stats from "@/src/components/Molecules/Stats/index";
-import { fileType } from "@/src/utils/client.d";
+import { fileType } from "@/src/utils/client";
 
 const Display = function({data}: {data: fileType[]}) {
 

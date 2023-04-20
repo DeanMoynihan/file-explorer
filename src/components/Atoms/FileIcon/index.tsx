@@ -1,6 +1,6 @@
 import React from "react";
 import { File, FileText, Code, List, Table, Image, Video } from "react-feather";
-import { getColour } from "../../../utils/client.d"
+import { getColour } from "../../../utils/client"
 
 const FileIcon = ({ ext, hover }: { ext: string | undefined, hover: boolean }) => {
 
