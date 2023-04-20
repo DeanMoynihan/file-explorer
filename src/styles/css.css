@@ -8,7 +8,14 @@ span {
   border-radius: 8px;
   min-width: 20px;
   text-align: center;
-  color: #2F576775;
+  color: #2f576775;
+}
+
+.loader-container {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 25%;
 }
 
 .file-icon {

@@ -1,33 +1,33 @@
 import { Audio } from "react-loader-spinner";
-import { observer } from "mobx-react";
-import { useStores } from "@/src/hooks/useStores";
 import FolderNode from "@/src/components/Molecules/FolderNode/index";
 import Stats from "@/src/components/Molecules/Stats/index";
+import { fileType } from "@/src/utils/client";
 
-const Display = observer(() => {
-  const { data } = useStores();
+const Display = function({data}: {data: fileType[]}) {
 
   return (
-    <div className="content-container">
-      {data.isLoading ? (
-        <Audio height="80" width="80" color="black" ariaLabel="loading" />
+    <div >
+      {data.length === 0 ? (
+        <div className="loader-container">
+          <Audio height="80" width="80" color="black" ariaLabel="loading" />
+        </div>
       ) : (
-        <>
+        <div className="content-container">
           <div className="explorer-container">
-            {data.files.length !== 0 &&
-              data.files
+            {data.length !== 0 &&
+              data
                 .filter(
                   ({parent, type}) => parent === null && type === "folder"
                 )
                 .map((rootFolder, i) => {
-                  return <FolderNode key={i} folder={rootFolder} margin={16} />;
+                  return <FolderNode key={i} folder={rootFolder} data={data} margin={16} />;
                 })}
           </div>
-          <Stats />
-        </>
+          <Stats data={data}/>
+        </div>
       )}
     </div>
   );
-});
+};
 
 export default Display;
