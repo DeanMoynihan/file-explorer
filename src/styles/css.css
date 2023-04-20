@@ -1,0 +1,72 @@
+body {
+  background-color: #fefae0;
+}
+
+span {
+  background-color: #faedcd;
+  padding: 2px;
+  border-radius: 8px;
+  min-width: 20px;
+  text-align: center;
+  color: #2F576775;
+}
+
+.file-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #faedcd;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.file-node {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.folder-node {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.folder-node-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.file-node-container {
+  margin-bottom: 4px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.explorer-container {
+  min-width: 33%;
+}
+
+.stats-container {
+  max-width: 25%;
+}
+
+@media only screen and (max-width: 600px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+}
