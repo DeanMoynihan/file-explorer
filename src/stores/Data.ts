@@ -21,8 +21,8 @@ class Data {
       getTotalOfFileType: observable,
     });
 
-    this.updateData(mockData as fileType[]);
-    //this.loadData();
+    //this.updateData(mockData as fileType[]);
+    this.loadData();
   }
 
   async loadData() {
