@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Audio } from "react-loader-spinner";
 import FolderNode from "@/src/components/Molecules/FolderNode/index";
 import Stats from "@/src/components/Molecules/Stats/index";
 import { fileType } from "@/src/utils/client";
+import SearchBar from "../SearchBar";
 
 const Display = function ({ data }: { data: fileType[] }) {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   return (
     <div>
       {data.length === 0 ? (
@@ -13,6 +17,7 @@ const Display = function ({ data }: { data: fileType[] }) {
       ) : (
         <div className="content-container">
           <div className="explorer-container">
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             {data.length !== 0 &&
               data
                 .filter(
@@ -25,6 +30,7 @@ const Display = function ({ data }: { data: fileType[] }) {
                       folder={rootFolder}
                       data={data}
                       margin={16}
+                      searchFilter={searchTerm}
                     />
                   );
                 })}

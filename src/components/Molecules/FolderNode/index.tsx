@@ -7,10 +7,12 @@ const FolderNode = ({
   folder,
   margin,
   data,
+  searchFilter,
 }: {
   folder: fileType;
   margin: number;
   data: fileType[];
+  searchFilter: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverState, setHoverState] = useState(false);
@@ -54,15 +56,36 @@ const FolderNode = ({
                 className="file-node-container"
               >
                 {file.type === "folder" ? (
-                  <FolderNode folder={file} margin={margin + 16} data={data} />
+                  <FolderNode
+                    folder={file}
+                    margin={margin + 16}
+                    data={data}
+                    searchFilter={searchFilter}
+                  />
                 ) : (
-                  <FileNode title={file.name} ext={file.ext} id={file.id} />
+                  <FileNode
+                    title={file.name}
+                    ext={file.ext}
+                    id={file.id}
+                    hide={
+                      !(
+                        file.name.includes(searchFilter) ||
+                        searchFilter === "" ||
+                        file.ext.includes(searchFilter)
+                      )
+                    }
+                  />
                 )}
               </div>
             ))}
           {data.filter(({ parent }) => parent === folder.id).length === 0 && (
             <div style={{ marginLeft: margin }} className="file-node-container">
-              <FileNode title={"empty"} ext={undefined} id={undefined} />
+              <FileNode
+                title={"empty"}
+                ext={undefined}
+                id={undefined}
+                hide={false}
+              />
             </div>
           )}
         </div>
