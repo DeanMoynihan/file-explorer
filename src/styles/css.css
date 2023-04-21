@@ -11,6 +11,34 @@ span {
   color: #2f576775;
 }
 
+input {
+  padding: 8px 8px 8px 32px;
+  width: 250px;
+  margin: 8px 4px;
+  border-radius: 8px;
+  border-color: #264653;
+  border-style: solid;
+  background-color: #faedcd;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+.search-icon {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+}
+
+.search-x {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  cursor: pointer;
+}
+
 .loader-container {
   width: 100%;
   position: absolute;
