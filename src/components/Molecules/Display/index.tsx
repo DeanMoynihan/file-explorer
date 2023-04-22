@@ -30,7 +30,7 @@ const Display = function ({ data }: { data: fileType[] }) {
                       folder={rootFolder}
                       data={data}
                       margin={16}
-                      searchFilter={searchTerm}
+                      searchFilter={searchTerm.toLowerCase()}
                     />
                   );
                 })}

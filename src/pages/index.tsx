@@ -44,12 +44,12 @@ export default function Home({ data }: { data: fileType[] }) {
       <div className="counter-container">{counter}</div>
       <h1>File Explorer</h1>
       <h2>Dean Moynihan</h2>
-      <Display data={data} />
+      {data !== null ? <Display data={data} /> : "Unable to load data"}
     </>
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps() {  
   try {
     if (process.env.NEXT_PUBLIC_API_TOKEN === undefined) {
       throw new Error("No API Key");
@@ -59,8 +59,8 @@ export async function getServerSideProps() {
       headers: { "x-secret-api-key": process.env.NEXT_PUBLIC_API_TOKEN },
     });
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
+    if (res.status !== 200) {
+      throw new Error("Unable to load data");
     }
 
     const data = await res.json();
@@ -68,5 +68,6 @@ export async function getServerSideProps() {
     return { props: { data } };
   } catch (e) {
     console.error(e);
+    return { props: {data: null } };
   }
 }
